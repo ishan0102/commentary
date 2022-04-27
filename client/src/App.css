@@ -1,38 +1,87 @@
-.App {
-  text-align: center;
+/* twitter color is: #1DA1F2 */
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 0 5rem;
+    background-color: whitesmoke;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.score {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: medium;
+    font-weight: bold;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    padding-bottom: 1rem;
+    width: 20rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.scorebar {
+    height: 1rem;
+    background-color: #1DA1F2;
+    border-radius: 0.5rem;
+    transition: width 0.5 ease, background-color 0.5 ease;
+    -webkit-transition: width 0.5s ease, background-color 0.5s ease;
+    -o-transition: width 0.5 ease, background-color 0.5 ease;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.tweet-compose {
+    position: relative;
+    width: 100%;
+    max-width: 50rem;
+    height: 100%;
+    border-radius: 1.5rem;
+    font-size: 16px;
+    background-color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.compose-header {
+    border-bottom: #1DA1F2 1px solid;
+    padding: 0.8rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.compose-body {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+textarea {
+    border: none;
+    outline: none;
+    resize: none;
+    width: 90%;
+    height: 10rem;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+.compose-footer {
+    padding: 0.8rem 1.2rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: #aaa;
+}
+
+
+.tweet-button {
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #1DA1F2;
+    border: none;
+    border-radius: 2rem;
+    padding: 0.8rem 1.2rem;
+    margin: 0 0 0 0.8rem;
 }

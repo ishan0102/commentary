@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+import scipy.sparse._csr
 import pickle
 
 tfidf = pickle.load(open('./models/tfidf_vectorizer.pkl', 'rb'))

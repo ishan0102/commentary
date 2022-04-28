@@ -21,6 +21,12 @@
     width: 20rem;
 }
 
+.score-text {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
 .scorebar-container {
     display: flex;
     justify-content: center;
@@ -42,7 +48,6 @@
     width: 50%;
     padding: 0.5rem 0;
 }
-
 
 .scorebar {
     height: 1rem;
@@ -106,4 +111,15 @@ textarea {
     border-radius: 2rem;
     padding: 0.8rem 1.2rem;
     margin: 0 0 0 0.8rem;
+}
+
+.elon-button {
+    margin-top: 1rem;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #000000;
+    border: none;
+    border-radius: 2rem;
+    padding: 0.8rem 1.2rem;
 }

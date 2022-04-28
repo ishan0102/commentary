@@ -2,6 +2,7 @@ import './App.css';
 import { useState, useRef } from 'react';
 import TwitterIcon from './assets/twitter.svg';
 import axios from 'axios';
+import getRandomTweet from './assets/elon.js'
 
 const API = 'http://localhost:8000';
 
@@ -33,7 +34,9 @@ export default function App() {
   return (
     <div className='main'>
       <div className='score'>
-        Score: {Math.round(score * 10000) / 100}%
+        <div className='score-text'>
+          Score: {Math.round(score * 10000) / 100}
+        </div>
         <div className='scorebar-container'>
           <div className='scorebar-element-left'>
             <div
@@ -69,12 +72,11 @@ export default function App() {
           <button className='tweet-button'
             onClick={() => {
               // prevent api calls if tweet is too short
-              if (tweetBoxRef.current.value.length < 8) {
+              if (tweetBoxRef.current.value.length < 15) {
                 alert('Tweet must be at least 15 characters long');
                 return
               }
-              // random percentage between -1 and 1
-              setScore(Math.random() * 2 - 1);
+
               axios.post(`${API}/predict`, {
                 'tweet': tweetBoxRef.current.value
               }).then(res => {
@@ -89,6 +91,12 @@ export default function App() {
           </button>
         </div>
       </div>
+      <button className='elon-button'
+        onClick={() => {
+          tweetBoxRef.current.value = getRandomTweet();
+        }}>
+        Elon Musk
+      </button>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import TwitterIcon from './assets/twitter.svg';
 import axios from 'axios';
 import getRandomTweet from './assets/elon.js'
 
-const API = 'http://localhost:8000';
+const API = 'https://ee461p-server-eyvr5tia5q-uc.a.run.app/';
 
 export default function App() {
 

@@ -33,9 +33,10 @@ export default function App() {
 
   return (
     <div className='main'>
+      <div className='description'>Write a tweet and our model will predict how your audience will respond!</div>
       <div className='score'>
         <div className='score-text'>
-          Score: {Math.round(score * 10000) / 100}
+          Reply Sentiment: {Math.round(score * 10000) / 100}
         </div>
         <div className='scorebar-container'>
           <div className='scorebar-element-left'>

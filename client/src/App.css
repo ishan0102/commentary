@@ -5,16 +5,21 @@
     justify-content: center;
     flex-direction: column;
     min-height: 100vh;
-    padding: 0 5rem;
     background-color: whitesmoke;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.description {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
 }
 
 .score {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    font-size: medium;
+    font-size: xx-large;
     font-weight: bold;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     padding-bottom: 1rem;
@@ -60,21 +65,29 @@
 .tweet-compose {
     position: relative;
     width: 100%;
-    max-width: 50rem;
+    /* max-width: 100%; */
+    max-width: 80rem;
     height: 100%;
     border-radius: 1.5rem;
-    font-size: 16px;
+    font-size: xx-large;
     background-color: white;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .tweet-compose {
+        max-width: 95%;
+    }
 }
 
 .compose-header {
     border-bottom: #1DA1F2 1px solid;
-    padding: 0.8rem 1.2rem;
+    padding: 1.2rem 1.8rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-weight: bold;
-    font-size: large;
+    font-size: xx-large;
 }
 
 .compose-body {
@@ -88,13 +101,13 @@ textarea {
     outline: none;
     resize: none;
     width: 90%;
-    height: 10rem;
+    height: 30rem;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 16px;
+    font-size: xx-large;
 }
 
 .compose-footer {
-    padding: 0.8rem 1.2rem;
+    padding: 1.2rem 1.6rem;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -109,8 +122,9 @@ textarea {
     background-color: #1DA1F2;
     border: none;
     border-radius: 2rem;
-    padding: 0.8rem 1.2rem;
-    margin: 0 0 0 0.8rem;
+    font-size: large;
+    padding: 1.2rem 1.6rem;
+    margin: 0 0 0 1.2rem;
 }
 
 .elon-button {
@@ -121,5 +135,6 @@ textarea {
     background-color: #000000;
     border: none;
     border-radius: 2rem;
-    padding: 0.8rem 1.2rem;
+    padding: 1.2rem 1.6rem;
+    font-size: large;
 }

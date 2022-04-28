@@ -22,20 +22,20 @@ export default function App() {
 
   // take nth root of score to get a percentage to get a better looking bar
   const getRightWidth = () => {
-    if (score > 0) return (Math.pow(score, 1/n) * 100) + '%';
+    if (score > 0) return (Math.pow(score, 1 / n) * 100) + '%';
     return '0%';
   }
-  
+
   const getLeftWidth = () => {
-    if (score < 0) return (Math.pow(-score, 1/n) * 100) + '%';
+    if (score < 0) return (Math.pow(-score, 1 / n) * 100) + '%';
     return '0%';
   }
 
   return (
     <div className='main'>
-      <div className='description'>Write a tweet and our model will predict how your audience will respond!</div>
+      <div className='description twitter-font'>Write a tweet and our model will predict how your audience will respond!</div>
       <div className='score'>
-        <div className='score-text'>
+        <div className='score-text twitter-font bold'>
           Reply Sentiment: {Math.round(score * 10000) / 100}
         </div>
         <div className='scorebar-container'>
@@ -54,12 +54,13 @@ export default function App() {
         </div>
       </div>
       <div className='tweet-compose'>
-        <div className='compose-header'>
-          <img src={TwitterIcon} alt="Twitter" />
+        <div className='compose-header twitter-title bold'>
+          <img src={TwitterIcon} alt='Twitter' className='twitter-icon' />
           Twitter: A Commentary
         </div>
         <div className='compose-body'>
           <textarea
+            className='twitter-font'
             maxLength={280} //  max length of a tweet
             ref={tweetBoxRef}
             onChange={() => {
@@ -69,35 +70,37 @@ export default function App() {
           </textarea>
         </div>
         <div className='compose-footer'>
-          {characterLength}
-          <button className='tweet-button'
+          <button className='pill-button'
             onClick={() => {
-              // prevent api calls if tweet is too short
-              if (tweetBoxRef.current.value.length < 15) {
-                alert('Tweet must be at least 15 characters long');
-                return
-              }
-
-              axios.post(`${API}/predict`, {
-                'tweet': tweetBoxRef.current.value
-              }).then(res => {
-                console.log(res);
-                setScore(res.data.sentiment);
-              }).catch(err => {
-                console.log(err);
-              })
-
+              tweetBoxRef.current.value = getRandomTweet();
             }}>
-            Tweet
+            Elon
           </button>
+          <div className='reply-container twitter-font'>
+            {characterLength}
+            <button className='pill-button twitter-button'
+              onClick={() => {
+                // prevent api calls if tweet is too short
+                if (tweetBoxRef.current.value.length < 15) {
+                  alert('Tweet must be at least 15 characters long');
+                  return
+                }
+
+                axios.post(`${API}/predict`, {
+                  'tweet': tweetBoxRef.current.value
+                }).then(res => {
+                  console.log(res);
+                  setScore(res.data.sentiment);
+                }).catch(err => {
+                  console.log(err);
+                })
+
+              }}>
+              Tweet
+            </button>
+          </div>
         </div>
       </div>
-      <button className='elon-button'
-        onClick={() => {
-          tweetBoxRef.current.value = getRandomTweet();
-        }}>
-        Elon Musk
-      </button>
     </div>
   );
 }

@@ -1,0 +1,21 @@
+id	                tweet	                                            sentiment	reply_count
+1223752255846912000	fox corporation owner fox news trying bully ro...	-0.520000	150
+1223738389003952128	folk hear cornovirus deal news heck doctor rec...	-0.200000	45
+1223748267609030659	news finally excited journey potential finding...	0.500000	6
+1223739174160928773	good news person investigation novel coronavir...	-0.250000	12
+1223737953291128837	two avid golfer promised whoever died first wo...	0.166667	36
+
+
+id          	    tweet
+1223752255846912000	The Fox Corporation (The owners of Fox News) a...
+1223738389003952128	Folks, you hear about this cornovirus deal in ...
+1223748267609030659	The news is finally out !!!! I will be on @lov...
+1223739174160928773	Good news! The person under investigation for ...
+1223737953291128837	Two avid golfers promised that, whoever died f...
+
+label	    id
+positive	1223759356631625729
+negative	1223752255846912000
+neutral	    1223752255846912000
+negative	1223752255846912000
+negative	1223752255846912000

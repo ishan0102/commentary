@@ -9,7 +9,7 @@
 
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage[size=custom,width=121.92,height=91.44,scale=1.2]{beamerposter}
+\usepackage[size=custom,width=121.92,height=91.44,scale=1.22]{beamerposter}
 \usetheme{gemini}
 \usecolortheme{gemini}
 \usepackage{graphicx}
@@ -77,7 +77,7 @@
 
     Twitter has grown rapidly in the last decade as a platform for sharing short-form written content. It’s used by individuals to share thoughts and jokes, academics to discuss research, and even governments as a primary form of communication. This project seeks to predict response sentiment on a tweet’s replies using the tweet’s content.
 
-    This problem is relevant today since many creators want to gauge how their audience will respond to their content before publishing it. This can also be beneficial to organizations to help rephrase tweets that may be interpreted negatively to protect reputation. Finally, while this project will be focused on Twitter, the techniques can easily be applied to other major platforms like YouTube and Facebook, to help content creators gather insights.
+    This problem is relevant today since many creators want to gauge how their audience will respond to their content before publishing it. This can also be beneficial to organizations to help rephrase tweets that may be interpreted negatively to protect reputation. Finally, while this project will be focused on Twitter, the techniques can easily be applied to other major platforms like YouTube and Facebook to help content creators gather insights.
 
   \end{block}
 
@@ -145,17 +145,17 @@
 
   \begin{block}{Machine Learning}
 
-    We use XGBoost to train our model. Specifically, we used the \code{XGBRegressor} as we were trying to predict the sentiment score of a tweet's replies which can have a continuous value. This sentiment value was computed by taking the sum of the numeric score using the mapping previously define (positive=1, neutral=0, negative=-1), then normalizing by dividing by the total number of replies for that tweet. Additionally, we used \code{RandomizedSearchCV} to search for the best hyperparameters to achieve the best results with the dataset.
+    We experimented with a few different models (linear regression, decision trees, support vector machines) before settling on \code{XGBoost}, a gradient boosted decision tree model, as it yielded the lowest error. Specifically, we used \code{XGBRegressor} as we were trying to predict the sentiment score of a tweet's replies which can have a continuous value. We split the data into training and testing sets, where each training example consisted of a tweet and the sentiment score we computed earlier. We used \code{RandomizedSearchCV} to tune the model's hyperparameters as it randomly selects parameters, performs cross-validation, and returns the parameters that yielded the lowest error.
 
-    We can visualize the model's performance treating the results of the model as a classification problem. If we take the sign of the average of the sentiment scores, we can treat the model as a binary classification problem. We can then plot the ROC curve to see how the model's performs in terms of getting the overall sentiment for a tweet. 
+    We can visualize the model's performance by treating the model's results as a classification problem. If we take the sign of the average of the sentiment scores, we can reduce the problem to binary classification. We can then plot an ROC curve to see how often the model correctly predicts a positive or negative sentiment:
 
     \begin{figure}[h]
       \centering
-      \includegraphics[width=0.6\textwidth]{auroc.png}
+      \includegraphics[width=0.75\textwidth]{auroc.png}
       \caption{ROC curve for the model on the training set.}
     \end{figure}
 
-    This, however, is not a perfect metric since many tweets have a neutral sentiment that hovers relatively near 0; where taking the sign of such a tweet would not be a good indicator of the sentiment. The following plot shows the ROC curve for the model on the training set.
+    This, however, is not a perfect metric since many tweets have a neutral sentiment that hovers around 0, so taking the sign of these tweets is not a good indicator of its sentiment.
 
   \end{block}
 
@@ -171,18 +171,15 @@
 
     \begin{itemize}
       \item It is hard to judge the model's quality due to the nature of the data.
-      \item While the model generally predicts the sentiment of the replies correctly, it was often swayed by certain words in the input with abnormally high prior probabilities.
+      \item While the model generally predicts the sentiment of the replies correctly, it is often swayed by certain words in the input with abnormally high prior probabilities.
       \item Sarcasm and humor are interpreted subjectively but machine learning models make objective predictions.
     \end{itemize}
-
-    
-
 
   \end{alertblock}
 
   \begin{block}{Product Development}
 
-    After training the model, we decided to build a simple webapp that would let users predict response sentiment on tweets of their own. We created a simple backend with FastAPI and a frontend with React.js. Upon receiving a tweet, the backend cleans, vectorizes, and runs a saved version of the model on the tweet. The frontend then displays the predicted response sentiment on a sliding scale. Below is a screenshot of the frontend tested with one of Elon Musk's tweets:
+    After training the model, we decided to build a simple webapp that would let users predict response sentiment on tweets of their own. We created a lightweight backend with FastAPI and a frontend with React.js. Upon receiving a tweet, the backend cleans, vectorizes, and runs a saved version of the model on the tweet. The frontend then displays the predicted response sentiment on a sliding scale. Below is a screenshot of the frontend tested with one of Elon Musk's tweets:
 
     \begin{figure}[H]
       \centering
@@ -194,12 +191,14 @@
 
   \begin{block}{Future Research}
 
-    In the future, we would like to build a more robust model. Often, we noticed that the model could be easily skewed by the presence of certain words in the tweet with high prior probabilities like \code{love}. This could be combatted by training on a wider dataset or by using an n-gram model, which splits the data into $n$ word chunks to partially preserve the relationship between words that are next to each other. We would also like to make the model more easily interpretable by users since it is currently unclear which words affect the predicted sentiment the most.
+    In the future, we would like to build a more robust model. We noticed that the model could be easily skewed by the presence of certain words in the tweet with high prior probabilities like \code{love}. This could be combatted by training on a wider dataset or by using an n-gram model, which splits the data into $n$ word chunks to partially preserve the relationship between words that are next to each other. We would also like to make the model more easily interpretable by users since it is currently unclear which words affect the predicted sentiment the most.
   
   \end{block}
 
   \begin{block}{References}
 
+    \nocite{OpinionInversion}
+    \nocite{Survey}
     \footnotesize{\bibliographystyle{ieeetr}\bibliography{poster}}
 
   \end{block}

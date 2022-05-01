@@ -145,36 +145,17 @@
 
   \begin{block}{Machine Learning}
 
-    Nulla eget sem quam. Ut aliquam volutpat nisi vestibulum convallis. Nunc a
-    lectus et eros facilisis hendrerit eu non urna. Interdum et malesuada fames
-    ac ante \textit{ipsum primis} in faucibus. Etiam sit amet velit eget sem
-    euismod tristique. Praesent enim erat, porta vel mattis sed, pharetra sed
-    ipsum. Morbi commodo condimentum massa, \textit{tempus venenatis} massa
-    hendrerit quis. Maecenas sed porta est. Praesent mollis interdum lectus,
-    sit amet sollicitudin risus tincidunt non.
+    We use XGBoost to train our model. Specifically, we used the \code{XGBRegressor} as we were trying to predict the sentiment score of a tweet's replies which can have a continuous value. This sentiment value was computed by taking the sum of the numeric score using the mapping previously define (positive=1, neutral=0, negative=-1), then normalizing by dividing by the total number of replies for that tweet. Additionally, we used \code{RandomizedSearchCV} to search for the best hyperparameters to achieve the best results with the dataset.
 
-    Etiam sit amet tempus lorem, aliquet condimentum velit. Donec et nibh
-    consequat, sagittis ex eget, dictum orci. Etiam quis semper ante. Ut eu
-    mauris purus. Proin nec consectetur ligula. Mauris pretium molestie
-    ullamcorper. Integer nisi neque, aliquet et odio non, sagittis porta justo.
+    We can visualize the model's performance treating the results of the model as a classification problem. If we take the sign of the average of the sentiment scores, we can treat the model as a binary classification problem. We can then plot the ROC curve to see how the model's performs in terms of getting the overall sentiment for a tweet. 
 
-    \begin{itemize}
-      \item \textbf{Sed consequat} id ante vel efficitur. Praesent congue massa
-        sed est scelerisque, elementum mollis augue iaculis.
-        \begin{itemize}
-          \item In sed est finibus, vulputate
-            nunc gravida, pulvinar lorem. In maximus nunc dolor, sed auctor eros
-            porttitor quis.
-          \item Fusce ornare dignissim nisi. Nam sit amet risus vel lacus
-            tempor tincidunt eu a arcu.
-          \item Donec rhoncus vestibulum erat, quis aliquam leo
-            gravida egestas.
-        \end{itemize}
-      \item \textbf{Sed luctus, elit sit amet} dictum maximus, diam dolor
-        faucibus purus, sed lobortis justo erat id turpis.
-      \item \textbf{Pellentesque facilisis dolor in leo} bibendum congue.
-        Maecenas congue finibus justo, vitae eleifend urna facilisis at.
-    \end{itemize}
+    \begin{figure}[h]
+      \centering
+      \includegraphics[width=0.6\textwidth]{auroc.png}
+      \caption{ROC curve for the model on the training set.}
+    \end{figure}
+
+    This, however, is not a perfect metric since many tweets have a neutral sentiment that hovers relatively near 0; where taking the sign of such a tweet would not be a good indicator of the sentiment. The following plot shows the ROC curve for the model on the training set.
 
   \end{block}
 
